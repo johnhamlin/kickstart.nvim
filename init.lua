@@ -250,23 +250,23 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
   'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-  {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    },
-    init = function()
-      vim.g.barbar_auto_setup = false
-    end,
-    opts = {
-      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-      -- animation = true,
-      -- insert_at_start = true,
-      -- …etc.
-    },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  },
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function()
+  --     vim.g.barbar_auto_setup = false
+  --   end,
+  --   opts = {
+  --     -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+  --     -- animation = true,
+  --     -- insert_at_start = true,
+  --     -- …etc.
+  --   },
+  --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  -- },
   -- My Plugins
   'vimwiki/vimwiki',
   -- NOTE: Plugins can also be added by using a table,
@@ -596,6 +596,8 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          map('gh', vim.lsp.buf.hover, '[G]o [H]over')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client

@@ -1096,8 +1096,6 @@ require('nvim-tree').setup {
   },
 }
 
-vim.keymap.set('n', '<C-n>', ':NvimTreeFocus<CR>')
-
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
 vim.keymap.set('n', 'J', '}')

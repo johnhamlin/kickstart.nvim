@@ -1,4 +1,4 @@
--- disable netrw at the very start of your init.lua for nvim-tree
+-- disable netrw at the very start of your init.lua for neo-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.vimwiki_list = { { path = '~/Documents/vimwiki' } }
@@ -1081,20 +1081,20 @@ require('lazy').setup({
 vim.opt.termguicolors = true
 
 -- OR setup with some options
-require('nvim-tree').setup {
-  sort = {
-    sorter = 'case_sensitive',
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-}
+-- require('nvim-tree').setup {
+--   sort = {
+--     sorter = 'case_sensitive',
+--   },
+--   view = {
+--     width = 30,
+--   },
+--   renderer = {
+--     group_empty = true,
+--   },
+--   filters = {
+--     dotfiles = true,
+--   },
+-- }
 
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')

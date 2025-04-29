@@ -726,6 +726,24 @@ require('lazy').setup({
             },
           },
         },
+        helm_ls = {
+          filetypes = { 'helm' }, -- <- attaches only to helm buffers
+          root_dir = util.root_pattern 'Chart.yaml',
+          settings = {
+            ['helm-ls'] = { yamlls = { path = 'yaml-language-server' } },
+          },
+        },
+
+        yamlls = {
+          filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' }, -- <- *no* "helm"
+          settings = {
+            yaml = {
+              keyOrdering = false,
+              schemaStore = { enable = true },
+              yamlVersion = '1.2',
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed

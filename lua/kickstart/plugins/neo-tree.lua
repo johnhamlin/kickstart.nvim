@@ -26,7 +26,7 @@ return {
   cmd = 'Neotree',
   keys = {
     { '\\', ':Neotree toggle left reveal_force_cwd<cr>', desc = 'NeoTree reveal', silent = true },
-    -- { '|', ':Neotree reveal<cr>', desc = 'NeoTree reveal', silent = true },
+    { '|', ':Neotree focus<cr>', desc = 'NeoTree reveal', silent = true },
     { '<leader>b', ':Neotree toggle show buffers right<cr>', desc = 'NeoTree reveal', silent = true },
   },
   init = function()

@@ -25,7 +25,9 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '\\', ':Neotree toggle left reveal_force_cwd<cr>', desc = 'NeoTree reveal', silent = true },
+    -- { '|', ':Neotree reveal<cr>', desc = 'NeoTree reveal', silent = true },
+    { '<leader>b', ':Neotree toggle show buffers right<cr>', desc = 'NeoTree reveal', silent = true },
   },
   init = function()
     if vim.fn.argc(-1) == 1 then

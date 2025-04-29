@@ -1,5 +1,6 @@
 -- leap.nvim - Motion plugin for Neovim
 -- https://github.com/ggandor/leap.nvim
+--
 
 return {
   'ggandor/leap.nvim',

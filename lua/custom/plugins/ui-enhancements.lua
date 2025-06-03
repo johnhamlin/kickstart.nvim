@@ -1,26 +1,26 @@
 -- lua/custom/plugins/ui-enhancements.lua
 return {
   -- Better notifications
-  -- {
-  --   'rcarriga/nvim-notify',
-  --   event = 'VeryLazy',
-  --   opts = {
-  --     timeout = 3000,
-  --     max_height = function()
-  --       return math.floor(vim.o.lines * 0.75)
-  --     end,
-  --     max_width = function()
-  --       return math.floor(vim.o.columns * 0.75)
-  --     end,
-  --     on_open = function(win)
-  --       vim.api.nvim_win_set_config(win, { zindex = 100 })
-  --     end,
-  --   },
-  --   init = function()
-  --     -- Use nvim-notify as default notify function
-  --     vim.notify = require 'notify'
-  --   end,
-  -- },
+  {
+    'rcarriga/nvim-notify',
+    event = 'VeryLazy',
+    opts = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
+    },
+    init = function()
+      -- Use nvim-notify as default notify function
+      vim.notify = require 'notify'
+    end,
+  },
 
   -- Dashboard
   {
@@ -167,12 +167,38 @@ return {
       -- Enable the UI features we want
       input = { enabled = true },
       select = { enabled = true },
-      notifier = { enabled = true }, -- We're using nvim-notify instead
+      -- notifier = { enabled = true }, -- We're using nvim-notify instead
       -- You can explore other features like:
       statuscolumn = { enabled = true },
+      indent = { enabled = true },
+      lazygit = { configure = true },
       -- dashboard = { enabled = false }, -- We use alpha instead
       -- scroll = { enabled = false },
       -- words = { enabled = true }, -- Highlight word under cursor
+    },
+    -- put this in the same spec, or anywhere after snacks has loaded
+    keys = {
+      {
+        '<leader>gg',
+        function()
+          Snacks.lazygit()
+        end,
+        desc = 'Lazygit (cwd)',
+      },
+      {
+        '<leader>gl',
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = 'Git log (repo)',
+      },
+      {
+        '<leader>gf',
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = 'Git log (file)',
+      },
     },
   },
 

@@ -43,7 +43,7 @@ return {
   --     vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
   --
   --     -- Better quit
-  --     vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
+  vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' }),
   --
   --     -- Windows
   --     vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other Window' })

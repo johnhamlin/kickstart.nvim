@@ -1,0 +1,149 @@
+-- lua/custom/plugins/better-defaults.lua
+-- This file sets up better defaults and keymaps inspired by LazyVim
+
+return {
+  -- {
+  --   'lazy.nvim',
+  --   opts = function(_, opts)
+  --     -- Add better defaults to your existing setup
+  --
+  --     -- Better default options
+  --     vim.opt.pumblend = 10 -- Popup menu transparency
+  --     vim.opt.winminwidth = 5 -- Minimum window width
+  --     vim.opt.wrap = false -- Disable line wrap by default
+  --     vim.opt.fillchars = {
+  --       foldopen = '',
+  --       foldclose = '',
+  --       fold = ' ',
+  --       foldsep = ' ',
+  --       diff = '╱',
+  --       eob = ' ',
+  --     }
+  --
+  --     -- Better window navigation (these won't conflict with your Harpoon mappings)
+  --     -- Window resizing with arrow keys
+  --     vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+  --     vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+  --     vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+  --     vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+  --
+  --     -- Move Lines
+  --     vim.keymap.set('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move Down' })
+  --     vim.keymap.set('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move Up' })
+  --     vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+  --     vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+  --     vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move Down' })
+  --     vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move Up' })
+  --
+  --     -- Better indenting
+  --     vim.keymap.set('v', '<', '<gv')
+  --     vim.keymap.set('v', '>', '>gv')
+  --
+  --     -- Better save
+  --     vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+  --
+  --     -- Better quit
+  --     vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
+  --
+  --     -- Windows
+  --     vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other Window' })
+  --     vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window' })
+  --     vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split Window Below' })
+  --     vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split Window Right' })
+  --     vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below' })
+  --     vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split Window Right' })
+  --
+  --     -- Tabs
+  --     vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+  --     vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+  --     vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+  --     vim.keymap.set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+  --     vim.keymap.set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+  --     vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+  --
+  --     -- Clear search, diff update and redraw
+  --     vim.keymap.set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / Clear hlsearch / Diff Update' })
+  --
+  --     -- Add undo break-points
+  --     vim.keymap.set('i', ',', ',<c-g>u')
+  --     vim.keymap.set('i', '.', '.<c-g>u')
+  --     vim.keymap.set('i', ';', ';<c-g>u')
+  --
+  --     -- Better n and N
+  --     vim.keymap.set('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
+  --     vim.keymap.set('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+  --     vim.keymap.set('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+  --     vim.keymap.set('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search Result' })
+  --     vim.keymap.set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
+  --     vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
+  --
+  --     -- Diagnostic keymaps (enhanced)
+  --     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next Diagnostic' })
+  --     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostic' })
+  --     vim.keymap.set('n', ']e', function()
+  --       vim.diagnostic.goto_next { severity = vim.diagnostic.severity.ERROR }
+  --     end, { desc = 'Next Error' })
+  --     vim.keymap.set('n', '[e', function()
+  --       vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.ERROR }
+  --     end, { desc = 'Previous Error' })
+  --     vim.keymap.set('n', ']w', function()
+  --       vim.diagnostic.goto_next { severity = vim.diagnostic.severity.WARN }
+  --     end, { desc = 'Next Warning' })
+  --     vim.keymap.set('n', '[w', function()
+  --       vim.diagnostic.goto_prev { severity = vim.diagnostic.severity.WARN }
+  --     end, { desc = 'Previous Warning' })
+  --
+  --     -- Toggle options
+  --     vim.keymap.set('n', '<leader>uf', function()
+  --       vim.opt.formatoptions:toggle 'a'
+  --     end, { desc = 'Toggle Auto Format' })
+  --     vim.keymap.set('n', '<leader>up', function()
+  --       vim.opt.paste = not vim.opt.paste:get()
+  --     end, { desc = 'Toggle Paste Mode' })
+  --     vim.keymap.set('n', '<leader>us', function()
+  --       vim.opt.spell = not vim.opt.spell:get()
+  --     end, { desc = 'Toggle Spelling' })
+  --     vim.keymap.set('n', '<leader>uw', function()
+  --       vim.opt.wrap = not vim.opt.wrap:get()
+  --     end, { desc = 'Toggle Word Wrap' })
+  --     vim.keymap.set('n', '<leader>ul', function()
+  --       vim.opt.relativenumber = not vim.opt.relativenumber:get()
+  --     end, { desc = 'Toggle Relative Numbers' })
+  --     vim.keymap.set('n', '<leader>ud', function()
+  --       vim.diagnostic.disable(not vim.diagnostic.is_disabled())
+  --     end, { desc = 'Toggle Diagnostics' })
+  --     vim.keymap.set('n', '<leader>uc', function()
+  --       local conceallevel = vim.opt.conceallevel:get()
+  --       vim.opt.conceallevel = conceallevel == 0 and 3 or 0
+  --     end, { desc = 'Toggle Conceal' })
+  --
+  --     -- Lazy
+  --     vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+  --
+  --     -- New file
+  --     vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
+  --
+  --     -- Location and quickfix lists
+  --     vim.keymap.set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
+  --     vim.keymap.set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
+  --     vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
+  --     vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
+  --
+  --     -- Make which-key show these new groups
+  --     local wk = require 'which-key'
+  --     wk.add {
+  --       { '<leader><tab>', group = 'tabs' },
+  --       { '<leader>u', group = 'ui/toggle' },
+  --       { '<leader>w', group = 'windows' },
+  --       { '<leader>x', group = 'diagnostics/quickfix' },
+  --       { '<leader>b', group = 'buffer' },
+  --       { '<leader>f', group = 'file/find' },
+  --       { '<leader>g', group = 'git' },
+  --       { '<leader>q', group = 'quit/session' },
+  --       { '<leader>m', group = 'markdown' },
+  --     }
+  --
+  --     return opts
+  --   end,
+  -- },
+}

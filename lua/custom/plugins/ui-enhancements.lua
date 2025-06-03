@@ -1,26 +1,26 @@
 -- lua/custom/plugins/ui-enhancements.lua
 return {
   -- Better notifications
-  {
-    'rcarriga/nvim-notify',
-    event = 'VeryLazy',
-    opts = {
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { zindex = 100 })
-      end,
-    },
-    init = function()
-      -- Use nvim-notify as default notify function
-      vim.notify = require 'notify'
-    end,
-  },
+  -- {
+  --   'rcarriga/nvim-notify',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     timeout = 3000,
+  --     max_height = function()
+  --       return math.floor(vim.o.lines * 0.75)
+  --     end,
+  --     max_width = function()
+  --       return math.floor(vim.o.columns * 0.75)
+  --     end,
+  --     on_open = function(win)
+  --       vim.api.nvim_win_set_config(win, { zindex = 100 })
+  --     end,
+  --   },
+  --   init = function()
+  --     -- Use nvim-notify as default notify function
+  --     vim.notify = require 'notify'
+  --   end,
+  -- },
 
   -- Dashboard
   {
@@ -118,44 +118,47 @@ return {
   },
 
   -- Better UI
-  -- {
-  --   'folke/noice.nvim',
-  --   enable = false,
-  --   event = 'VeryLazy',
-  --   opts = {
-  --     lsp = {
-  --       override = {
-  --         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-  --         ['vim.lsp.util.stylize_markdown'] = true,
-  --         ['cmp.entry.get_documentation'] = true,
-  --       },
-  --     },
-  --     routes = {
-  --       {
-  --         filter = {
-  --           event = 'msg_show',
-  --           any = {
-  --             { find = '%d+L, %d+B' },
-  --             { find = '; after #%d+' },
-  --             { find = '; before #%d+' },
-  --           },
-  --         },
-  --         view = 'mini',
-  --       },
-  --     },
-  --     presets = {
-  --       bottom_search = true,
-  --       command_palette = true,
-  --       long_message_to_split = true,
-  --       inc_rename = true,
-  --       lsp_doc_border = false,
-  --     },
-  --   },
-  --   dependencies = {
-  --     'MunifTanjim/nui.nvim',
-  --     'rcarriga/nvim-notify',
-  --   },
-  -- },
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+      lsp = {
+        override = {
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+          ['cmp.entry.get_documentation'] = true,
+        },
+      },
+      routes = {
+        {
+          filter = {
+            event = 'msg_show',
+            any = {
+              { find = '%d+L, %d+B' },
+              { find = '; after #%d+' },
+              { find = '; before #%d+' },
+            },
+          },
+          view = 'mini',
+        },
+      },
+      popupmenu = {
+        enabled = true,
+        backend = 'nui',
+      },
+      presets = {
+        -- bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = true,
+        lsp_doc_border = false,
+      },
+    },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+  },
 
   -- Better vim.ui (using snacks.nvim instead of archived dressing.nvim)
   {
@@ -284,24 +287,24 @@ return {
   -- },
 
   -- Scrollbar
-  -- {
-  --   'petertriho/nvim-scrollbar',
-  --   event = 'BufReadPost',
-  --   config = function()
-  --     local scrollbar = require 'scrollbar'
-  --     scrollbar.setup {
-  --       handle = {
-  --         color = '#51504f',
-  --       },
-  --       marks = {
-  --         Search = { color = '#ff9e64' },
-  --         Error = { color = '#db4b4b' },
-  --         Warn = { color = '#e0af68' },
-  --         Info = { color = '#0db9d7' },
-  --         Hint = { color = '#1abc9c' },
-  --         Misc = { color = '#9d7cd8' },
-  --       },
-  --     }
-  --   end,
-  -- },
+  {
+    'petertriho/nvim-scrollbar',
+    event = 'BufReadPost',
+    config = function()
+      local scrollbar = require 'scrollbar'
+      scrollbar.setup {
+        handle = {
+          color = '#51504f',
+        },
+        marks = {
+          Search = { color = '#ff9e64' },
+          Error = { color = '#db4b4b' },
+          Warn = { color = '#e0af68' },
+          Info = { color = '#0db9d7' },
+          Hint = { color = '#1abc9c' },
+          Misc = { color = '#9d7cd8' },
+        },
+      }
+    end,
+  },
 }

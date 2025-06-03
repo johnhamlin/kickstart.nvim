@@ -10,10 +10,6 @@ return {
   config = function()
     local leap = require 'leap'
 
-    -- Remove the default s/S keybindings
-    vim.keymap.del({ 'n', 'x', 'o' }, 's')
-    vim.keymap.del({ 'n', 'x', 'o' }, 'S')
-
     -- Add custom z/Z keybindings
     vim.keymap.set({ 'n', 'x', 'o' }, 'z', '<Plug>(leap-forward)')
     vim.keymap.set({ 'n', 'x', 'o' }, 'Z', '<Plug>(leap-backward)')

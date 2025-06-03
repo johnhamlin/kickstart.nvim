@@ -9,17 +9,7 @@ return {
       -- This is VERY helpful when reporting an issue with the project
       -- vim.g["conjure#debug"] = true
     end,
-    -- Optional cmp-conjure integration
-    dependencies = { 'PaterJason/cmp-conjure' },
-  },
-  {
-    'PaterJason/cmp-conjure',
-    lazy = true,
-    config = function()
-      local cmp = require 'cmp'
-      local config = cmp.get_config()
-      table.insert(config.sources, { name = 'conjure' })
-      return cmp.setup(config)
-    end,
+    -- NOTE: cmp-conjure is for nvim-cmp only and doesn't work with blink.cmp yet
+    -- TODO: Look for blink.cmp integration for conjure in the future
   },
 }

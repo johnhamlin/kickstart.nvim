@@ -1090,13 +1090,24 @@ vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'yaml', 'yml' },
   callback = function()
-    vim.opt_local.expandtab = true -- Use spaces instead of tabs
-    vim.opt_local.tabstop = 2 -- Tab width of 2
-    vim.opt_local.shiftwidth = 2 -- Indent width of 2
-    vim.opt_local.softtabstop = 2 -- Soft tab width of 2
-    vim.opt_local.autoindent = true -- Auto indent
-    vim.opt_local.smartindent = true -- Smart indent
+    -- Disable guess-indent for this buffer
+    vim.b.guess_indent_disable = true
+
+    -- Force the correct settings
+    vim.opt_local.expandtab = true -- Use spaces, not tabs
+    vim.opt_local.tabstop = 2 -- Display tabs as 2 spaces
+    vim.opt_local.softtabstop = 2 -- Tab key inserts 2 spaces
+    vim.opt_local.shiftwidth = 2 -- >> and << indent by 2 spaces
+    vim.opt_local.autoindent = true -- Copy indent from current line
+    vim.opt_local.smartindent = false -- Don't be "smart" about indenting
+
+    -- Fix YAML-specific indentation issues
+    vim.opt_local.indentkeys = vim.opt_local.indentkeys - '0#' - '<:>'
+
+    -- Show a message to confirm it's working
+    print 'YAML indentation set to 2 spaces'
   end,
+  group = vim.api.nvim_create_augroup('YamlIndentFix', { clear = true }),
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

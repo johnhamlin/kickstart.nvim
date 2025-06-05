@@ -755,6 +755,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'prettier',
+        'yamlfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -809,8 +810,9 @@ require('lazy').setup({
         lua = { 'stylua' },
         swift = { 'swiftformat' },
         javascript = { 'prettierd' },
-        yaml = { 'prettier' },
-        yml = { 'prettier' },
+        yaml = { 'yamlfmt' },
+        yml = { 'yamlfmt' },
+        helm = { 'yamlfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1108,6 +1110,61 @@ vim.api.nvim_create_autocmd('FileType', {
     print 'YAML indentation set to 2 spaces'
   end,
   group = vim.api.nvim_create_augroup('YamlIndentFix', { clear = true }),
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'helm' },
+  callback = function()
+    -- Disable guess-indent for helm files
+    vim.b.guess_indent_disable = true
+
+    -- Force the correct settings for Helm (which is YAML-based)
+    vim.opt_local.expandtab = true -- Use spaces, not tabs
+    vim.opt_local.tabstop = 2 -- Display tabs as 2 spaces
+    vim.opt_local.softtabstop = 2 -- Tab key inserts 2 spaces
+    vim.opt_local.shiftwidth = 2 -- >> and << indent by 2 spaces
+    vim.opt_local.autoindent = true -- Copy indent from current line
+    vim.opt_local.smartindent = false -- Don't be "smart" about indenting
+
+    -- Fix YAML-specific indentation issues (since Helm is YAML)
+    vim.opt_local.indentkeys = vim.opt_local.indentkeys - '0#' - '<:>'
+
+    -- Show a message to confirm it's working
+    print 'Helm file indentation set to 2 spaces'
+  end,
+  group = vim.api.nvim_create_augroup('HelmIndentFix', { clear = true }),
+})
+
+-- Optional: Also apply YAML settings to helm files for consistency
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'helm' },
+  callback = function()
+    -- Set some YAML-like settings for better editing
+    vim.opt_local.foldmethod = 'indent'
+    vim.opt_local.foldlevelstart = 99 -- Start with all folds open
+
+    -- Add helm-specific keymaps
+    local opts = { buffer = true, noremap = true, silent = true }
+
+    -- Format current Helm file (treat as YAML)
+    vim.keymap.set('n', '<leader>hf', function()
+      -- Temporarily set filetype to yaml for formatting
+      local original_ft = vim.bo.filetype
+      vim.bo.filetype = 'yaml'
+      require('conform').format { timeout_ms = 500 }
+      vim.bo.filetype = original_ft
+    end, vim.tbl_extend('force', opts, { desc = 'Format Helm file as YAML' }))
+
+    -- Fix indentation manually
+    vim.keymap.set('n', '<leader>hi', function()
+      vim.cmd 'set expandtab'
+      vim.cmd 'set tabstop=2'
+      vim.cmd 'set shiftwidth=2'
+      vim.cmd 'retab'
+      vim.cmd 'normal! ggVG='
+      print 'Helm file indentation fixed'
+    end, vim.tbl_extend('force', opts, { desc = 'Fix Helm indentation' }))
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

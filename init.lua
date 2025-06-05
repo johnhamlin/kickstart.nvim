@@ -754,6 +754,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -808,6 +809,8 @@ require('lazy').setup({
         lua = { 'stylua' },
         swift = { 'swiftformat' },
         javascript = { 'prettierd' },
+        yaml = { 'prettier' },
+        yml = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1082,6 +1085,19 @@ vim.keymap.set('n', 'L', '$')
 vim.keymap.set('n', 'J', '}')
 vim.keymap.set('n', 'K', '{')
 vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
+
+-- Set proper indentation for YAML files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'yaml', 'yml' },
+  callback = function()
+    vim.opt_local.expandtab = true -- Use spaces instead of tabs
+    vim.opt_local.tabstop = 2 -- Tab width of 2
+    vim.opt_local.shiftwidth = 2 -- Indent width of 2
+    vim.opt_local.softtabstop = 2 -- Soft tab width of 2
+    vim.opt_local.autoindent = true -- Auto indent
+    vim.opt_local.smartindent = true -- Smart indent
+  end,
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

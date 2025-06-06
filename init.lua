@@ -800,6 +800,10 @@ require('lazy').setup({
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        -- Check if disabled for this specific buffer
+        if vim.b[bufnr].disable_autoformat then
+          return nil
+        end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
@@ -1179,6 +1183,16 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.opt.wildignore:append { '*/node_modules/*' }
+
+-- Disable format on save for current buffer
+vim.keymap.set('n', '<leader>tf', function()
+  vim.b.disable_autoformat = not vim.b.disable_autoformat
+  if vim.b.disable_autoformat then
+    print 'Autoformat disabled for this buffer'
+  else
+    print 'Autoformat enabled for this buffer'
+  end
+end, { desc = '[T]oggle [F]ormat on save for current buffer' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

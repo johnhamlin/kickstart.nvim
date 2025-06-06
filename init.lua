@@ -416,11 +416,17 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+          file_ignore_patterns = {
+            'node_modules/.*',
+            '%.git/.*',
+            'dist/.*',
+            'build/.*',
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -1170,6 +1176,8 @@ vim.api.nvim_create_autocmd('FileType', {
     end, vim.tbl_extend('force', opts, { desc = 'Fix Helm indentation' }))
   end,
 })
+
+vim.opt.wildignore:append { '*/node_modules/*' }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

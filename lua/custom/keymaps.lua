@@ -10,6 +10,13 @@ vim.keymap.set('n', '<C-;>', 'A;<CR>', { desc = 'Complete statement with ; and n
 
 vim.keymap.set('i', '<C-,>', '<Esc>A,<CR>', { desc = 'Complete statement with , and new line' })
 vim.keymap.set('n', '<C-,>', 'A,<CR>', { desc = 'Complete statement with , and new line' })
+
+vim.keymap.set('n', 'H', '^')
+vim.keymap.set('n', 'L', '$')
+vim.keymap.set('n', 'J', '}')
+vim.keymap.set('n', 'K', '{')
+
+-- vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
 -- Add any other custom keymaps here
 
 -- Return the module (optional)

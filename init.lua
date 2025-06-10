@@ -1106,12 +1106,6 @@ vim.opt.termguicolors = true
 --   },
 -- }
 
-vim.keymap.set('n', 'H', '^')
-vim.keymap.set('n', 'L', '$')
-vim.keymap.set('n', 'J', '}')
-vim.keymap.set('n', 'K', '{')
-vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
-
 -- Set proper indentation for YAML files
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'yaml', 'yml' },

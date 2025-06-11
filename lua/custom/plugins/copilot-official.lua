@@ -21,6 +21,7 @@ return {
         hgcommit = false,
         svn = false,
         cvs = false,
+        vimwiki = false,
         ['.'] = false,
       }
 

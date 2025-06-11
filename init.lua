@@ -59,8 +59,7 @@ Kickstart Guide:
 
     (If you already know the Neovim basics, you can skip this step.)
 
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
+  Once you've completed that, you can continue working through **AND READING** the kickstart init.lua.
 
   Next, run AND READ `:help`.
     This will open up a help window with some basic information
@@ -172,13 +171,6 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
-vim.opt.expandtab = true -- Use spaces, not tabs
-vim.opt.tabstop = 2 -- Display tabs as 2 spaces
-vim.opt.softtabstop = 2 -- Tab key inserts 2 spaces
-vim.opt.shiftwidth = 2 -- >> and << indent by 2 spaces
-vim.opt.autoindent = true -- Copy indent from current line
-vim.opt.smartindent = true -- Be "smart" about indenting
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 -- Load custom keymaps
@@ -264,7 +256,6 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   { -- Detect tabstop and shiftwidth automatically
     'NMAC427/guess-indent.nvim',
-    enabled = false,
     config = function()
       require('guess-indent').setup {}
     end,

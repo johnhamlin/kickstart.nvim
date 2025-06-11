@@ -44,6 +44,7 @@ return {
   --
   --     -- Better quit
   vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' }),
+  vim.keymap.set('n', '<leader>qw', '<cmd>wq<cr>', { desc = 'Quit and Write' }),
   --
   --     -- Windows
   --     vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other Window' })

@@ -16,6 +16,15 @@ vim.keymap.set('n', 'L', '$')
 vim.keymap.set('n', 'J', '}')
 vim.keymap.set('n', 'K', '{')
 
+-- Center cursor line in normal and visual modes
+local map = vim.keymap.set
+map({ 'n', 'x' }, '<leader>l', function()
+  vim.cmd 'normal! zz'
+end, { silent = true, desc = 'Centre cursor line' })
+
+-- Insert-mode helper (optional)
+map('i', '<C-l>', '<C-o>zz', { silent = true, desc = 'Centre cursor line' })
+
 -- vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
 -- Add any other custom keymaps here
 

@@ -11,9 +11,9 @@ return {
   opts = {},
   keys = {
     {
-      '<leader>tT',
+      '<leader>ut',
       '<cmd>TWToggle<cr>',
-      desc = '[T]oggle [T]ypewriter mode',
+      desc = '[U]I [T]ypewriter mode',
       silent = true,
     },
   },

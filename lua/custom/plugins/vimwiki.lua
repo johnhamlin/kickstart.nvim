@@ -36,7 +36,8 @@ return {
 
       -- QoL tweaks
       vim.g.taskwiki_disable_concealcursor = 1 -- keep filters visible in insert mode
-      vim.g.taskwiki_dont_fold = 1 -- avoid automatic folding
+      vim.g.taskwiki_dont_fold = "yes"
+      vim.g.taskwiki_dont_preserve_folds = "yes"
     end,
   },
   --   -- only load when a Vimwiki buffer is opened

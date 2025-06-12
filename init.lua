@@ -1212,5 +1212,16 @@ vim.keymap.set('n', '<leader>tf', function()
   end
 end, { desc = '[T]oggle [F]ormat on save for current buffer' })
 
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.foldenable = false
+    vim.opt_local.foldmethod = "manual"
+    vim.opt_local.foldlevel = 99
+  end,
+})
+
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

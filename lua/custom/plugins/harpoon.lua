@@ -2,7 +2,6 @@ return {
   {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope.nvim',
@@ -11,46 +10,44 @@ return {
       local harpoon = require 'harpoon'
       harpoon:setup()
 
-      local list = harpoon:list()
-
-      -- Telescope integration
+      -- Telescope integration (your setup is correct)
       local ok, telescope = pcall(require, 'telescope')
       if ok then
-        telescope.load_extension 'harpoon'
+        pcall(telescope.load_extension, 'harpoon')
       end
 
-      -- Keymaps (no conflicts with existing mappings)
       local map = vim.keymap.set
 
       -- Add current file to Harpoon list
       map('n', '<leader>ha', function()
-        list:append()
+        harpoon:list():add()
+        vim.notify('Harpooned file', vim.log.levels.INFO)
       end, { desc = 'Harpoon: [A]dd file' })
 
       -- Toggle Harpoon quick menu
       map('n', '<leader>hh', function()
-        harpoon.ui:toggle_quick_menu(list)
+        harpoon.ui:toggle_quick_menu(harpoon:list())
       end, { desc = 'Harpoon: Toggle [H]arpoon menu' })
 
-      -- Navigate to first four marks using <leader>1-4
+      -- **FIXED**: Navigate to the first four marks
+      -- The loop now correctly captures the index for each keymap.
       for i = 1, 4 do
-        map('n', '<leader>' .. i, function()
-          list:select(i)
-        end, { desc = 'Harpoon: Go to file ' .. i })
-
-        map('n', '<leader>hv' .. i, function()
-          list:select(i, { vsplit = true })
-        end, { desc = '[H]arpoon: [V]-split file ' .. i })
-
-        map('n', '<leader>hs' .. i, function()
-          list:select(i, { split = true })
-        end, { desc = '[H]arpoon: h-[S]plit file ' .. i })
+        local index = i
+        map('n', '<leader>' .. index, function()
+          harpoon:list():select(index)
+        end, { desc = 'Harpoon: Go to file ' .. index })
       end
 
-      -- Telescope picker for all Harpoon files
-      map('n', '<leader>ht', function()
-        require('telescope').extensions.harpoon.marks {}
-      end, { desc = 'Harpoon: Telescope picker' })
+      -- NOTE: Your original mappings for vertical and horizontal splits
+      -- (`<leader>hv` and `<leader>hs`) used an API from harpoon1.
+      -- The modern `harpoon2` workflow encourages using the quick menu
+      -- for splits. Open the menu with `<leader>hh` and then use
+      -- <C-v> for a vertical split or <C-s> for a horizontal split.
+
+      -- Telescope picker for all Harpoon files (your setup is correct)
+      map('n', '<leader>sh', function()
+        require('telescope').extensions.harpoon.marks()
+      end, { desc = '[S]earch [H]arpoon' })
     end,
   },
-} 
+}

@@ -2,6 +2,8 @@
 -- https://github.com/ggandor/leap.nvim
 --
 
+-- Leap config has been superseded by flash.nvim. Keeping for reference.
+--[[
 return {
   'ggandor/leap.nvim',
   dependencies = {
@@ -21,3 +23,6 @@ return {
     }
   end,
 }
+]]
+
+return {}

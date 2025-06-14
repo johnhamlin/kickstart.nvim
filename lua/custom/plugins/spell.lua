@@ -39,17 +39,17 @@ return {
     end, '[S}earch [S]pell suggestions')
 
     -- Add current word to the good spell list ("g" for good)
-    map('n', '<leader>sg', function()
+    map('n', '<leader>sa', function()
       local word = vim.fn.expand '<cword>'
       vim.cmd('silent spellgood ' .. word)
       vim.notify('Added "' .. word .. '" to dictionary')
-    end, '[S]pell [G]ood')
+    end, '[S]pellcheck [A]dd')
 
     -- Mark current word as bad ("b" for bad)
     map('n', '<leader>sb', function()
       local word = vim.fn.expand '<cword>'
       vim.cmd('silent spellbad ' .. word)
       vim.notify('Marked "' .. word .. '" as bad')
-    end, '[S]pell [B]ad')
+    end, '[S]pellcheck [B]ad')
   end,
 }

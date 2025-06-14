@@ -451,7 +451,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope Picker' })
+      vim.keymap.set('n', '<leader>sp', builtin.builtin, { desc = '[S]earch [P]ickers' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -771,6 +771,7 @@ require('lazy').setup({
         'prettierd', -- Used to format JS/TS/HTML/CSS code
         'yamlfmt',
         'tailwindcss-language-server',
+        'gofumpt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -828,6 +829,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         swift = { 'swiftformat' },
+        go = { 'gofumpt' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         javascriptreact = { 'prettierd' },
@@ -841,13 +843,13 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
-        formatters = {
-          yamlfmt = {
-            args = {
-              '--retain_line_breaks_single',
-              '--retain_line_breaks',
-              '-',
-            },
+      },
+      formatters = {
+        yamlfmt = {
+          args = {
+            '--retain_line_breaks_single',
+            '--retain_line_breaks',
+            '-',
           },
         },
       },
@@ -888,7 +890,6 @@ require('lazy').setup({
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
-      'rafamadriz/friendly-snippets', -- useful snippets
       'onsails/lspkind.nvim', -- vs-code like pictograms
     },
     --- @module 'blink.cmp'
@@ -1140,7 +1141,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.indentkeys = vim.opt_local.indentkeys - '0#' - '<:>'
 
     -- Show a message to confirm it's working
-    print 'YAML indentation set to 2 spaces'
+    vim.notify('YAML indentation set to 2 spaces', vim.log.levels.DEBUG)
   end,
   group = vim.api.nvim_create_augroup('YamlIndentFix', { clear = true }),
 })
@@ -1163,7 +1164,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.indentkeys = vim.opt_local.indentkeys - '0#' - '<:>'
 
     -- Show a message to confirm it's working
-    print 'Helm file indentation set to 2 spaces'
+    vim.notify('Helm file indentation set to 2 spaces', vim.log.levels.DEBUG)
   end,
   group = vim.api.nvim_create_augroup('HelmIndentFix', { clear = true }),
 })
@@ -1195,7 +1196,7 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.cmd 'set shiftwidth=2'
       vim.cmd 'retab'
       vim.cmd 'normal! ggVG='
-      print 'Helm file indentation fixed'
+      vim.notify('Helm file indentation fixed', vim.log.levels.DEBUG)
     end, vim.tbl_extend('force', opts, { desc = 'Fix Helm indentation' }))
   end,
 })
@@ -1206,22 +1207,20 @@ vim.opt.wildignore:append { '*/node_modules/*' }
 vim.keymap.set('n', '<leader>tf', function()
   vim.b.disable_autoformat = not vim.b.disable_autoformat
   if vim.b.disable_autoformat then
-    print 'Autoformat disabled for this buffer'
+    vim.notify('Autoformat disabled for this buffer', vim.log.levels.DEBUG)
   else
-    print 'Autoformat enabled for this buffer'
+    vim.notify('Autoformat enabled for this buffer', vim.log.levels.DEBUG)
   end
 end, { desc = '[T]oggle [F]ormat on save for current buffer' })
 
-
-vim.api.nvim_create_autocmd({ "BufWinEnter", "BufRead", "BufNewFile" }, {
-  pattern = "*",
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufRead', 'BufNewFile' }, {
+  pattern = '*',
   callback = function()
     vim.opt_local.foldenable = false
-    vim.opt_local.foldmethod = "manual"
+    vim.opt_local.foldmethod = 'manual'
     vim.opt_local.foldlevel = 99
   end,
 })
-
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

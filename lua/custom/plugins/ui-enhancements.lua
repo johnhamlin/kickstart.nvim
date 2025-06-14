@@ -170,7 +170,7 @@ return {
     opts = {
       -- Enable the UI features we want
       input = { enabled = true },
-      select = { enabled = true },
+      -- select = { enabled = true },
       -- notifier = { enabled = true }, -- We're using nvim-notify instead
       -- You can explore other features like:
       statuscolumn = { enabled = true },

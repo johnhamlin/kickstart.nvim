@@ -26,15 +26,16 @@ end, { silent = true, desc = 'Centre cursor line' })
 map('i', '<C-l>', '<C-o>zz', { silent = true, desc = 'Centre cursor line' })
 
 -- Folding Keymaps
-vim.keymap.set('n', '<leader>fo', '<Cmd>normal! zo<CR>', { desc = '[F]old [O]pen fold under cursor' })
-vim.keymap.set('n', '<leader>fc', '<Cmd>normal! zc<CR>', { desc = '[F]old [C]lose fold under cursor' })
-vim.keymap.set('n', '<leader>ft', '<Cmd>normal! za<CR>', { desc = '[F]old [T]oggle fold under cursor' })
-vim.keymap.set('n', '<leader>fO', '<Cmd>normal! zO<CR>', { desc = '[F]old [O]pen all folds under cursor recursively' })
-vim.keymap.set('n', '<leader>fC', '<Cmd>normal! zC<CR>', { desc = '[F]old [C]lose all folds under cursor recursively' })
-vim.keymap.set('n', '<leader>fR', '<Cmd>normal! zR<CR>', { desc = '[F]old open all folds in buffer' })
-vim.keymap.set('n', '<leader>fM', '<Cmd>normal! zM<CR>', { desc = '[F]old close all folds in buffer' })
-vim.keymap.set('n', '<leader>fr', '<Cmd>normal! zr<CR>', { desc = '[F]old reduce fold level by 1' })
-vim.keymap.set('n', '<leader>fm', '<Cmd>normal! zm<CR>', { desc = '[F]fold increase fold level by 1' })
+-- Moved to ufo.lua
+-- vim.keymap.set('n', '<leader>fo', '<Cmd>normal! zo<CR>', { desc = '[F]old [O]pen fold under cursor' })
+-- vim.keymap.set('n', '<leader>fc', '<Cmd>normal! zc<CR>', { desc = '[F]old [C]lose fold under cursor' })
+-- vim.keymap.set('n', '<leader>ft', '<Cmd>normal! za<CR>', { desc = '[F]old [T]oggle fold under cursor' })
+-- vim.keymap.set('n', '<leader>fO', '<Cmd>normal! zO<CR>', { desc = '[F]old [O]pen all folds under cursor recursively' })
+-- vim.keymap.set('n', '<leader>fC', '<Cmd>normal! zC<CR>', { desc = '[F]old [C]lose all folds under cursor recursively' })
+-- vim.keymap.set('n', '<leader>fR', '<Cmd>normal! zR<CR>', { desc = '[F]old open all folds in buffer' })
+-- vim.keymap.set('n', '<leader>fM', '<Cmd>normal! zM<CR>', { desc = '[F]old close all folds in buffer' })
+-- vim.keymap.set('n', '<leader>fr', '<Cmd>normal! zr<CR>', { desc = '[F]old reduce fold level by 1' })
+-- vim.keymap.set('n', '<leader>fm', '<Cmd>normal! zm<CR>', { desc = '[F]fold increase fold level by 1' })
 
 -- vim.keymap.set('n', '<C-S-Space>', 'vimwiki_<C-Space>')
 -- Add any other custom keymaps here

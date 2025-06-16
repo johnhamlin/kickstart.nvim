@@ -360,9 +360,10 @@ require('lazy').setup({
       spec = {
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace/[W]iki' },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>t', group = '[T]asks' },
+        { '<leader>h', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>f', group = '[F] Format/Folding' },
+        { '<leader>u', group = '[U]I' },
       },
     },
   },

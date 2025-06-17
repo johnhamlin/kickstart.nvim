@@ -116,7 +116,15 @@ return {
       ufo.setup(opts)
 
       -- Fancy fold column icons
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      -- Define fill characters with exactly one character each to avoid E1511
+      -- See :help 'fillchars' for valid fields. Using table form is clearer and safer.
+      vim.opt.fillchars = {
+        eob = ' ',        -- Empty lines at the end of buffer
+        fold = ' ',       -- Fold lines
+        foldopen = '',  -- Icon for open fold (Nerd Font)
+        foldclose = '', -- Icon for closed fold (Nerd Font)
+        foldsep = ' ',    -- Fold column separator
+      }
 
       -- Better fold text highlighting
       vim.api.nvim_set_hl(0, 'Folded', { bg = 'none', fg = '#6c7086' })

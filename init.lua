@@ -744,14 +744,14 @@ require('lazy').setup({
           },
         },
 
-        racket_langserver = {
-          cmd = { 'racket', '--lib', 'racket-langserver' },
-          filetypes = { 'racket', 'scheme' },
-          root_dir = function(fname)
-            return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-          end,
-          single_file_support = true,
-        },
+        -- racket_langserver = {
+        --   cmd = { 'racket', '--lib', 'racket-langserver' },
+        --   filetypes = { 'racket', 'scheme' },
+        --   root_dir = function(fname)
+        --     return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        --   end,
+        --   single_file_support = true,
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -768,6 +768,11 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      -- for i, pkg in ipairs(ensure_installed) do
+      --   if pkg == 'racket_langserver' then
+      --     ensure_installed[i] = 'racket-langserver'
+      --   end
+      -- end
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         -- 'prettier',

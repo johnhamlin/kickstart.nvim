@@ -144,6 +144,7 @@ return {
   -- Project management
   {
     'ahmedkhalf/project.nvim',
+    enabled = false,
     opts = {
       manual_mode = false,
       detection_methods = { 'pattern', 'lsp' },
@@ -158,7 +159,7 @@ return {
       require('telescope').load_extension 'projects'
     end,
     keys = {
-      { '<leader>fp', '<cmd>Telescope projects<cr>', desc = 'Find Project' },
+      { '<leader>sP', '<cmd>Telescope projects<cr>', desc = '[S]earch [P]roject' },
     },
   },
 

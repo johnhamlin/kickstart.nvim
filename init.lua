@@ -453,6 +453,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s?', builtin.help_tags, { desc = '[S]earch [?] Help' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sF', function()
+        builtin.find_files { hidden = true, no_ignore = true, follow = true }
+      end, { desc = '[S]earch ALL [F]iles (hidden + ignored)' })
       vim.keymap.set('n', '<leader>sp', builtin.builtin, { desc = '[S]earch [P]ickers' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -686,6 +689,13 @@ require('lazy').setup({
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- Advertise foldingRange support so nvim-ufo can use the LSP provider when
+      -- available.  This is the extra snippet recommended in the nvim-ufo docs.
+      capabilities.textDocument = capabilities.textDocument or {}
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -1221,14 +1231,6 @@ vim.keymap.set('n', '<leader>tf', function()
   end
 end, { desc = '[T]oggle [F]ormat on save for current buffer' })
 
-vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufRead', 'BufNewFile' }, {
-  pattern = '*',
-  callback = function()
-    vim.opt_local.foldenable = false
-    vim.opt_local.foldmethod = 'manual'
-    vim.opt_local.foldlevel = 99
-  end,
-})
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+

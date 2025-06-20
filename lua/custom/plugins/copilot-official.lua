@@ -5,6 +5,7 @@ return {
   -- Official GitHub Copilot plugin (better proxy support)
   {
     'github/copilot.vim',
+    enabled = false,
     event = 'VimEnter',
     config = function()
       -- Disable default tab mapping if you want to use your own

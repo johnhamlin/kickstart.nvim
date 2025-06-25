@@ -23,7 +23,7 @@ return {
       close_if_last_window = true,
       hijack_netrw_behavior = 'open_default',
       filtered_items = {
-        hide_gitignored = false,
+        hide_gitignored = true,
       },
     },
   },

@@ -743,6 +743,38 @@ require('lazy').setup({
           },
         },
 
+        -- add/replace inside `local servers = { … }`
+        mdx_analyzer = {
+          -- 1.  Let the server find TypeScript
+          init_options = {
+            typescript = {
+              enabled = true,
+              -- point to the *directory* that contains `typescript.js`
+              -- project-local installs are safest:
+              tsdk = vim.fn.getcwd() .. '/node_modules/typescript/lib',
+              -- or, if you rely on Mason’s copy:
+              -- tsdk = vim.fn.stdpath('data')
+              --           .. '/mason/packages/typescript-language-server/node_modules/typescript/lib',
+            },
+          },
+
+          -- 2.  Optional MDX-specific validation tweaks
+          settings = {
+            mdx = {
+              -- enable the built-in linting rules
+              validate = {
+                validateReferences = 'warning',
+                validateFragmentLinks = 'warning',
+                validateFileLinks = 'warning',
+                validateMarkdownFileLinkFragments = 'warning',
+                validateUnusedLinkDefinitions = 'warning',
+                validateDuplicateLinkDefinitions = 'warning',
+              },
+              -- ignoreLinks = { "**/public/**" },  -- glob if you need exceptions
+            },
+          },
+        },
+
         yamlls = {
           filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' }, -- <- *no* "helm"
           settings = {
@@ -790,6 +822,7 @@ require('lazy').setup({
         'yamlfmt',
         'tailwindcss-language-server',
         'gofumpt',
+        'mdx-analyzer',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1231,5 +1264,8 @@ vim.keymap.set('n', '<leader>tf', function()
   end
 end, { desc = '[T]oggle [F]ormat on save for current buffer' })
 
+vim.filetype.add {
+  extension = { mdx = 'mdx' },
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

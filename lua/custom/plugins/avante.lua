@@ -1,6 +1,7 @@
 return {
   -- Avante.nvim – full-featured AI assistant (Cursor-like)
   {
+    enabled = false,
     'yetone/avante.nvim',
     build = 'make', -- compile the Rust native helpers (quick)
     event = 'VeryLazy', -- load lazily after UI is ready
@@ -100,4 +101,3 @@ return {
     },
   },
 }
-

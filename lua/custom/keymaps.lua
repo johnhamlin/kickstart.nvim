@@ -26,7 +26,7 @@ end, { silent = true, desc = 'Centre cursor line' })
 map('i', '<C-l>', '<C-o>zz', { silent = true, desc = 'Centre cursor line' })
 
 vim.keymap.set('n', '<leader>rf', ':TSToolsRenameFile<CR>', { desc = 'TS [R]ename [f]ile + fix imports' })
-vim.keymap.set('n', '<leader>rr', ':TSToolsFileReferences', { desc = 'TS [R]eferences' })
+vim.keymap.set('n', '<leader>rr', ':TSToolsFileReferences<CR>', { desc = 'TS [R]eferences' })
 -- vim.keymap.set('n', '<leader>fc', '<Cmd>normal! zc<CR>', { desc = '[F]old [C]lose fold under cursor' })
 -- vim.keymap.set('n', '<leader>ft', '<Cmd>normal! za<CR>', { desc = '[F]old [T]oggle fold under cursor' })
 -- vim.keymap.set('n', '<leader>fO', '<Cmd>normal! zO<CR>', { desc = '[F]old [O]pen all folds under cursor recursively' })
